@@ -1,0 +1,52 @@
+name: Make buttons bigger
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  resize:
+    if: ${{ !contains(github.event.head_commit.message, 'Make buttons bigger') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Enlarge action buttons more than 2x
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* BUTTONS BIGGER THAN 2X V1 */'
+          if marker not in s:
+              s = s.replace('</style>', '''
+          /* BUTTONS BIGGER THAN 2X V1 */
+          @media (min-width: 801px) and (orientation: landscape) {
+            .p5, .p6 { bottom: 24% !important; }
+            .actions { width: 220% !important; margin-left: -60% !important; gap: 6px !important; }
+            .actions button { height: 78px !important; font-size: 15px !important; padding: 0 6px !important; border-radius: 10px !important; }
+          }
+          @media (max-width: 800px) {
+            .p5, .p6 { bottom: 20% !important; }
+            .actions { width: 210% !important; margin-left: -55% !important; gap: 5px !important; }
+            .actions button { height: 70px !important; font-size: 14px !important; padding: 0 5px !important; border-radius: 10px !important; }
+          }
+          </style>''')
+              p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git commit -m "Make buttons bigger"
+          git push
