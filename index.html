@@ -109,6 +109,18 @@
   .actions { width: 145% !important; margin-left: -22.5% !important; gap: 3px !important; }
   .actions button { height: 34px !important; font-size: 10px !important; padding: 0 3px !important; border-radius: 8px !important; }
 }
+
+/* BUTTONS BIGGER THAN 2X V1 */
+@media (min-width: 801px) and (orientation: landscape) {
+  .p5, .p6 { bottom: 24% !important; }
+  .actions { width: 220% !important; margin-left: -60% !important; gap: 6px !important; }
+  .actions button { height: 78px !important; font-size: 15px !important; padding: 0 6px !important; border-radius: 10px !important; }
+}
+@media (max-width: 800px) {
+  .p5, .p6 { bottom: 20% !important; }
+  .actions { width: 210% !important; margin-left: -55% !important; gap: 5px !important; }
+  .actions button { height: 70px !important; font-size: 14px !important; padding: 0 5px !important; border-radius: 10px !important; }
+}
 </style></head><body><div class="game"><div class="table"></div><div class="center"><div class="potlabel">ROUND <b id="roundNo">1</b> · 판에 모인 금액</div><div id="pot" class="pot">0냥</div><div class="call">현재 콜 <b id="callCost">0냥</b></div><div id="centerStatus" class="centerStatus">배팅 시작</div><div class="centerBtns"><button id="win" class="win">승</button><button id="undo" class="undo" disabled>이전</button></div></div><div id="players"></div><div id="toast" class="toast"></div><div id="impact" class="impact">최후의 결전</div><div id="winnerHint" class="winnerHint">승자를 터치하세요</div><!-- 개발자 정보는 시작 화면에서만 표시 -->
 <div id="developerPage" class="dev-page" aria-hidden="true">
  <div class="card dev-card">
