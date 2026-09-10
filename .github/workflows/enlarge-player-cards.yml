@@ -1,0 +1,74 @@
+name: Enlarge player cards and controls
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  enlarge:
+    if: ${{ !contains(github.event.head_commit.message, 'Enlarge player cards') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Enlarge cards, text and buttons
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* EXTRA LARGE PLAYER CARDS V1 */'
+          if marker not in s:
+              css = '''
+          /* EXTRA LARGE PLAYER CARDS V1 */
+          @media (min-width: 801px) and (orientation: landscape) {
+            .player { width: 150px !important; }
+            .p1 { left: 3% !important; top: 1.5% !important; }
+            .p2 { right: 3% !important; top: 1.5% !important; }
+            .p3 { left: 1.5% !important; top: 48% !important; }
+            .p4 { right: 1.5% !important; top: 48% !important; }
+            .p5 { left: 3% !important; bottom: 18% !important; }
+            .p6 { right: 3% !important; bottom: 18% !important; }
+            .seat { padding: 7px 8px 9px !important; border-radius: 17px !important; border-width: 2px !important; }
+            .avatar { width: 46px !important; height: 46px !important; margin-top: -24px !important; font-size: 23px !important; }
+            .name { font-size: 13px !important; }
+            .money { font-size: 19px !important; }
+            .bet { font-size: 12px !important; }
+            .badge { font-size: 11px !important; padding: 3px 9px !important; }
+            .actions { width: 180% !important; margin-left: -40% !important; gap: 6px !important; margin-top: 7px !important; }
+            .actions button { height: 52px !important; font-size: 12px !important; padding: 0 5px !important; border-radius: 10px !important; border-width: 2px !important; }
+            .checkedState { margin-top: 7px !important; padding: 9px 10px !important; font-size: 12px !important; }
+          }
+          @media (max-width: 800px) {
+            .player { width: 135px !important; }
+            .p1 { left: 2% !important; top: 1.5% !important; }
+            .p2 { right: 2% !important; top: 1.5% !important; }
+            .p3 { left: 1% !important; top: 45% !important; }
+            .p4 { right: 1% !important; top: 45% !important; }
+            .p5 { left: 2% !important; bottom: 16% !important; }
+            .p6 { right: 2% !important; bottom: 16% !important; }
+            .seat { padding: 6px 7px 8px !important; border-radius: 16px !important; border-width: 2px !important; }
+            .avatar { width: 42px !important; height: 42px !important; margin-top: -22px !important; font-size: 21px !important; }
+            .name { font-size: 12px !important; }
+            .money { font-size: 18px !important; }
+            .bet { font-size: 11px !important; }
+            .badge { font-size: 10px !important; padding: 3px 8px !important; }
+            .actions { width: 175% !important; margin-left: -37.5% !important; gap: 5px !important; margin-top: 6px !important; }
+            .actions button { height: 48px !important; font-size: 11px !important; padding: 0 4px !important; border-radius: 9px !important; border-width: 2px !important; }
+            .checkedState { margin-top: 6px !important; padding: 8px 9px !important; font-size: 11px !important; }
+          }
+          '''
+              s = s.replace('</style>', css + '\n</style>')
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Enlarge player cards and controls"
+          git push
