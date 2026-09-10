@@ -1,0 +1,74 @@
+name: Final player layout
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  layout:
+    if: ${{ !contains(github.event.head_commit.message, 'Final player layout') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Apply final layout
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* FINAL PLAYER LAYOUT V2 */'
+          if marker not in s:
+              css = '''
+          /* FINAL PLAYER LAYOUT V2 */
+          @media (min-width: 801px) and (orientation: landscape) {
+            .player { width: 270px !important; }
+            .p1 { left: 1.5% !important; top: 1% !important; }
+            .p2 { right: 1.5% !important; top: 1% !important; }
+            .p3 { left: 0.5% !important; top: 47% !important; }
+            .p4 { right: 0.5% !important; top: 47% !important; }
+            .p5 { left: 1.5% !important; bottom: 23% !important; }
+            .p6 { right: 1.5% !important; bottom: 23% !important; }
+            .seat { padding: 13px 14px 15px !important; border-radius: 24px !important; border-width: 3px !important; }
+            .avatar { width: 68px !important; height: 68px !important; margin-top: -35px !important; font-size: 34px !important; }
+            .name { font-size: 19px !important; }
+            .money { font-size: 27px !important; }
+            .bet { font-size: 17px !important; }
+            .badge { font-size: 16px !important; padding: 5px 13px !important; }
+            .actions { display: grid !important; grid-template-columns: repeat(5, minmax(0,1fr)) !important; width: 100% !important; margin-left: 0 !important; gap: 7px !important; margin-top: 10px !important; }
+            .actions button { height: 94px !important; width: 100% !important; min-width: 0 !important; font-size: 17px !important; padding: 0 4px !important; border-radius: 13px !important; border-width: 3px !important; }
+            .checkedState { margin-top: 10px !important; padding: 13px 14px !important; font-size: 17px !important; }
+          }
+          @media (max-width: 800px) {
+            .player { width: 243px !important; }
+            .p1 { left: 1% !important; top: 1% !important; }
+            .p2 { right: 1% !important; top: 1% !important; }
+            .p3 { left: 0 !important; top: 45% !important; }
+            .p4 { right: 0 !important; top: 45% !important; }
+            .p5 { left: 1% !important; bottom: 20% !important; }
+            .p6 { right: 1% !important; bottom: 20% !important; }
+            .seat { padding: 11px 12px 13px !important; border-radius: 22px !important; border-width: 3px !important; }
+            .avatar { width: 62px !important; height: 62px !important; margin-top: -32px !important; font-size: 31px !important; }
+            .name { font-size: 17px !important; }
+            .money { font-size: 25px !important; }
+            .bet { font-size: 15px !important; }
+            .badge { font-size: 14px !important; padding: 4px 11px !important; }
+            .actions { display: grid !important; grid-template-columns: repeat(5, minmax(0,1fr)) !important; width: 100% !important; margin-left: 0 !important; gap: 6px !important; margin-top: 9px !important; }
+            .actions button { height: 86px !important; width: 100% !important; min-width: 0 !important; font-size: 15px !important; padding: 0 3px !important; border-radius: 12px !important; border-width: 3px !important; }
+            .checkedState { margin-top: 9px !important; padding: 11px 12px !important; font-size: 15px !important; }
+          }
+          '''
+              s = s.replace('</style>', css + '\n</style>')
+              p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Final player layout"
+          git push
