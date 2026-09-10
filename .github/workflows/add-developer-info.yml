@@ -1,0 +1,29 @@
+name: Add developer info
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  add-info:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add developer information
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html'); s=p.read_text(encoding='utf-8')
+          marker='<!-- V4-DEVELOPER-INFO -->'
+          block='''<div id="v4-developer-info" style="position:fixed;left:50%;bottom:8px;transform:translateX(-50%);font-size:12px;opacity:.65;z-index:9999;pointer-events:none;white-space:nowrap">개발자: 장규민 · V4 Poker · © 2026</div>'''
+          if marker not in s:
+              s=s.replace('</body>',marker+'\n'+block+'\n</body>',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet || git commit -m 'Add developer information'
+          git push
