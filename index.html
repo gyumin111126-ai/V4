@@ -85,6 +85,30 @@
   .p5 { left: 3% !important; bottom: 10% !important; }
   .p6 { right: 3% !important; bottom: 10% !important; }
 }
+
+/* FINAL PLAYER LAYOUT V2 */
+@media (min-width: 801px) and (orientation: landscape) {
+  .player { width: 100px !important; }
+  .p1 { left: 4% !important; top: 2% !important; }
+  .p2 { right: 4% !important; top: 2% !important; }
+  .p3 { left: 4% !important; top: 47% !important; }
+  .p4 { right: 4% !important; top: 47% !important; }
+  .p5 { left: 4% !important; bottom: 20% !important; }
+  .p6 { right: 4% !important; bottom: 20% !important; }
+  .actions { width: 150% !important; margin-left: -25% !important; gap: 4px !important; }
+  .actions button { height: 36px !important; font-size: 11px !important; padding: 0 4px !important; border-radius: 8px !important; }
+}
+@media (max-width: 800px) {
+  .player { width: 100px !important; }
+  .p1 { left: 3% !important; top: 2% !important; }
+  .p2 { right: 3% !important; top: 2% !important; }
+  .p3 { left: 3% !important; top: 45% !important; }
+  .p4 { right: 3% !important; top: 45% !important; }
+  .p5 { left: 3% !important; bottom: 16% !important; }
+  .p6 { right: 3% !important; bottom: 16% !important; }
+  .actions { width: 145% !important; margin-left: -22.5% !important; gap: 3px !important; }
+  .actions button { height: 34px !important; font-size: 10px !important; padding: 0 3px !important; border-radius: 8px !important; }
+}
 </style></head><body><div class="game"><div class="table"></div><div class="center"><div class="potlabel">ROUND <b id="roundNo">1</b> · 판에 모인 금액</div><div id="pot" class="pot">0냥</div><div class="call">현재 콜 <b id="callCost">0냥</b></div><div id="centerStatus" class="centerStatus">배팅 시작</div><div class="centerBtns"><button id="win" class="win">승</button><button id="undo" class="undo" disabled>이전</button></div></div><div id="players"></div><div id="toast" class="toast"></div><div id="impact" class="impact">최후의 결전</div><div id="winnerHint" class="winnerHint">승자를 터치하세요</div><!-- 개발자 정보는 시작 화면에서만 표시 -->
 <div id="developerPage" class="dev-page" aria-hidden="true">
  <div class="card dev-card">
