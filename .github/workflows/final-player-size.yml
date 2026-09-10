@@ -18,18 +18,18 @@ jobs:
           s=p.read_text(encoding='utf-8')
           css='''
 <style>
-/* FINAL PLAYER UI 3X */
-.player{width:420px}
-.seat{padding:16px 22px 22px;border-radius:30px}
-.avatar{width:105px;height:105px;margin:-52px auto 12px;font-size:51px}
-.name{font-size:33px}.money{font-size:46px}.bet{font-size:29px}.badge{font-size:25px;padding:7px 18px;margin-top:9px}
-.actions{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:13px;width:115%;margin-left:-7.5%}
-.actions button{height:86px;min-width:0;font-size:25px;padding:0 5px;border-radius:15px}
-.checkedState{margin-top:13px;padding:14px 18px;font-size:26px}
+/* FINAL PLAYER UI 4.5X */
+.player{width:630px}
+.seat{padding:24px 33px 33px;border-radius:45px}
+.avatar{width:158px;height:158px;margin:-79px auto 18px;font-size:77px}
+.name{font-size:50px}.money{font-size:69px}.bet{font-size:44px}.badge{font-size:38px;padding:10px 22px;margin-top:14px}
+.actions{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:15px;margin-top:20px;width:110%;margin-left:-5%}
+.actions button{height:129px;min-width:0;font-size:38px;padding:0 7px;border-radius:23px}
+.checkedState{margin-top:20px;padding:17px 23px;font-size:39px}
 .p5{bottom:13%}.p6{bottom:13%}
 @media (min-width:801px) and (max-height:900px) and (orientation:landscape){
-.player{width:378px}.p1{left:1%;top:.5%}.p2{right:1%;top:.5%}.p3{left:.2%;top:50%}.p4{right:.2%;top:50%}.p5{left:1%;bottom:13%}.p6{right:1%;bottom:13%}
-.seat{padding:14px 18px 18px;border-radius:28px}.avatar{width:90px;height:90px;margin-top:-45px;font-size:44px}.name{font-size:30px}.money{font-size:42px}.bet{font-size:26px}.badge{font-size:22px;padding:6px 16px}.actions{width:115%;margin-left:-7.5%;gap:9px}.actions button{height:78px;font-size:23px}.checkedState{font-size:23px;padding:12px 16px}
+.player{width:567px}.p1{left:1%;top:.5%}.p2{right:1%;top:.5%}.p3{left:.2%;top:50%}.p4{right:.2%;top:50%}.p5{left:1%;bottom:13%}.p6{right:1%;bottom:13%}
+.seat{padding:21px 27px 27px;border-radius:42px}.avatar{width:135px;height:135px;margin-top:-68px;font-size:66px}.name{font-size:45px}.money{font-size:63px}.bet{font-size:40px}.badge{font-size:34px;padding:8px 20px}.actions{width:110%;margin-left:-5%;gap:13px}.actions button{height:117px;font-size:34px}.checkedState{font-size:35px;padding:15px 20px}
 }
 </style>
 '''
