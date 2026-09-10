@@ -1,4 +1,4 @@
-name: Enlarge player cards and controls
+name: Adjust player cards
 
 on:
   push:
@@ -8,57 +8,57 @@ permissions:
   contents: write
 
 jobs:
-  enlarge:
-    if: ${{ !contains(github.event.head_commit.message, 'Enlarge player cards') }}
+  adjust:
+    if: ${{ !contains(github.event.head_commit.message, 'Adjust player cards') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Enlarge cards, text and buttons
+      - name: Apply balanced player sizing
         run: |
           python3 - <<'PY'
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          marker = '/* EXTRA LARGE PLAYER CARDS V1 */'
+          marker = '/* BALANCED PLAYER CARDS V2 */'
           if marker not in s:
               css = '''
-          /* EXTRA LARGE PLAYER CARDS V1 */
+          /* BALANCED PLAYER CARDS V2 */
           @media (min-width: 801px) and (orientation: landscape) {
-            .player { width: 150px !important; }
-            .p1 { left: 3% !important; top: 1.5% !important; }
-            .p2 { right: 3% !important; top: 1.5% !important; }
+            .player { width: 120px !important; }
+            .p1 { left: 3% !important; top: 2% !important; }
+            .p2 { right: 3% !important; top: 2% !important; }
             .p3 { left: 1.5% !important; top: 48% !important; }
             .p4 { right: 1.5% !important; top: 48% !important; }
-            .p5 { left: 3% !important; bottom: 18% !important; }
-            .p6 { right: 3% !important; bottom: 18% !important; }
-            .seat { padding: 7px 8px 9px !important; border-radius: 17px !important; border-width: 2px !important; }
-            .avatar { width: 46px !important; height: 46px !important; margin-top: -24px !important; font-size: 23px !important; }
-            .name { font-size: 13px !important; }
-            .money { font-size: 19px !important; }
-            .bet { font-size: 12px !important; }
-            .badge { font-size: 11px !important; padding: 3px 9px !important; }
-            .actions { width: 180% !important; margin-left: -40% !important; gap: 6px !important; margin-top: 7px !important; }
-            .actions button { height: 52px !important; font-size: 12px !important; padding: 0 5px !important; border-radius: 10px !important; border-width: 2px !important; }
-            .checkedState { margin-top: 7px !important; padding: 9px 10px !important; font-size: 12px !important; }
+            .p5 { left: 3% !important; bottom: 14% !important; }
+            .p6 { right: 3% !important; bottom: 14% !important; }
+            .seat { padding: 4px 5px 6px !important; border-radius: 14px !important; border-width: 1px !important; }
+            .avatar { width: 36px !important; height: 36px !important; margin-top: -19px !important; font-size: 18px !important; }
+            .name { font-size: 11px !important; }
+            .money { font-size: 16px !important; }
+            .bet { font-size: 10px !important; }
+            .badge { font-size: 9px !important; padding: 2px 7px !important; }
+            .actions { width: 150% !important; margin-left: -25% !important; gap: 4px !important; margin-top: 5px !important; }
+            .actions button { height: 38px !important; font-size: 10px !important; padding: 0 3px !important; border-radius: 8px !important; border-width: 1px !important; }
+            .checkedState { margin-top: 5px !important; padding: 7px 8px !important; font-size: 10px !important; }
           }
           @media (max-width: 800px) {
-            .player { width: 135px !important; }
-            .p1 { left: 2% !important; top: 1.5% !important; }
-            .p2 { right: 2% !important; top: 1.5% !important; }
+            .player { width: 112px !important; }
+            .p1 { left: 2% !important; top: 2% !important; }
+            .p2 { right: 2% !important; top: 2% !important; }
             .p3 { left: 1% !important; top: 45% !important; }
             .p4 { right: 1% !important; top: 45% !important; }
-            .p5 { left: 2% !important; bottom: 16% !important; }
-            .p6 { right: 2% !important; bottom: 16% !important; }
-            .seat { padding: 6px 7px 8px !important; border-radius: 16px !important; border-width: 2px !important; }
-            .avatar { width: 42px !important; height: 42px !important; margin-top: -22px !important; font-size: 21px !important; }
-            .name { font-size: 12px !important; }
-            .money { font-size: 18px !important; }
-            .bet { font-size: 11px !important; }
-            .badge { font-size: 10px !important; padding: 3px 8px !important; }
-            .actions { width: 175% !important; margin-left: -37.5% !important; gap: 5px !important; margin-top: 6px !important; }
-            .actions button { height: 48px !important; font-size: 11px !important; padding: 0 4px !important; border-radius: 9px !important; border-width: 2px !important; }
-            .checkedState { margin-top: 6px !important; padding: 8px 9px !important; font-size: 11px !important; }
+            .p5 { left: 2% !important; bottom: 13% !important; }
+            .p6 { right: 2% !important; bottom: 13% !important; }
+            .seat { padding: 4px 5px 6px !important; border-radius: 14px !important; }
+            .avatar { width: 34px !important; height: 34px !important; margin-top: -18px !important; font-size: 17px !important; }
+            .name { font-size: 10px !important; }
+            .money { font-size: 15px !important; }
+            .bet { font-size: 9px !important; }
+            .badge { font-size: 9px !important; padding: 2px 6px !important; }
+            .actions { width: 145% !important; margin-left: -22.5% !important; gap: 4px !important; margin-top: 5px !important; }
+            .actions button { height: 36px !important; font-size: 9px !important; padding: 0 3px !important; border-radius: 7px !important; }
+            .checkedState { margin-top: 5px !important; padding: 6px 7px !important; font-size: 9px !important; }
           }
           '''
               s = s.replace('</style>', css + '\n</style>')
@@ -70,5 +70,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "Enlarge player cards and controls"
+          git commit -m "Adjust player cards"
           git push
