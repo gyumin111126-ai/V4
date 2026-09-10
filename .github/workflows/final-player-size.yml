@@ -14,33 +14,31 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import re
-          p=Path('index.html')
-          s=p.read_text(encoding='utf-8')
+          p=Path('index.html'); s=p.read_text(encoding='utf-8')
           css='''
 <style>
-/* FINAL PLAYER UI 6.75X */
-.player{width:945px}
-.seat{padding:36px 50px 50px;border-radius:68px}
-.avatar{width:237px;height:237px;margin:-118px auto 27px;font-size:115px}
-.name{font-size:75px}.money{font-size:104px}.bet{font-size:66px}.badge{font-size:57px;padding:15px 33px;margin-top:21px}
-.actions{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:23px;margin-top:30px;width:110%;margin-left:-5%}
-.actions button{height:194px;min-width:0;font-size:57px;padding:0 10px;border-radius:35px}
-.checkedState{margin-top:30px;padding:26px 35px;font-size:59px}
+/* FINAL PLAYER UI 1.6X */
+.player{width:1512px}
+.seat{padding:58px 80px 80px;border-radius:72px}
+.avatar{width:379px;height:379px;margin:-189px auto 29px;font-size:184px}
+.name{font-size:120px}.money{font-size:166px}.bet{font-size:106px}.badge{font-size:91px;padding:24px 53px;margin-top:22px}
+.actions{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:36px;margin-top:48px;width:110%;margin-left:-5%}
+.actions button{height:310px;min-width:0;font-size:91px;padding:0 12px;border-radius:55px}
+.checkedState{margin-top:48px;padding:42px 56px;font-size:94px}
 .p5{bottom:13%}.p6{bottom:13%}
 @media (min-width:801px) and (max-height:900px) and (orientation:landscape){
-.player{width:850px}.p1{left:1%;top:.5%}.p2{right:1%;top:.5%}.p3{left:.2%;top:50%}.p4{right:.2%;top:50%}.p5{left:1%;bottom:13%}.p6{right:1%;bottom:13%}
-.seat{padding:32px 41px 41px;border-radius:63px}.avatar{width:203px;height:203px;margin-top:-102px;font-size:99px}.name{font-size:68px}.money{font-size:95px}.bet{font-size:60px}.badge{font-size:51px;padding:12px 30px}.actions{width:110%;margin-left:-5%;gap:20px}.actions button{height:176px;font-size:51px}.checkedState{font-size:53px;padding:23px 30px}
+.player{width:1360px}.p1{left:1%;top:.5%}.p2{right:1%;top:.5%}.p3{left:.2%;top:50%}.p4{right:.2%;top:50%}.p5{left:1%;bottom:13%}.p6{right:1%;bottom:13%}
+.seat{padding:51px 66px 66px;border-radius:67px}.avatar{width:325px;height:325px;margin-top:-163px;font-size:158px}.name{font-size:108px}.money{font-size:152px}.bet{font-size:96px}.badge{font-size:82px;padding:19px 48px}.actions{width:110%;margin-left:-5%;gap:32px}.actions button{height:281px;font-size:82px}.checkedState{font-size:85px;padding:36px 48px}
 }
 </style>
 '''
           s=re.sub(r'<style>\s*/\* FINAL PLAYER UI .*?\*/.*?</style>\s*','',s,flags=re.S)
-          s=s.replace('</head>',css+'</head>',1)
-          p.write_text(s,encoding='utf-8')
+          s=s.replace('</head>',css+'</head>',1); p.write_text(s,encoding='utf-8')
           PY
       - name: Commit changes
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
-          git diff --cached --quiet || git commit -m 'Increase player UI by another 1.5x'
+          git diff --cached --quiet || git commit -m 'Increase player UI by 1.6x'
           git push
