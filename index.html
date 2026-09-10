@@ -573,4 +573,8 @@ function beginGame(names,startMoney){
 $('#start').onclick=()=>{const m=Math.max(ANTE,Number($('#startMoney').value)||3000);const names=Array.from({length:6},(_,i)=>$('#n'+i).value.trim()).filter(Boolean);beginGame(names,m)};
 $('#replay').onclick=()=>{if(lastGameSettings)beginGame(lastGameSettings.names,lastGameSettings.startMoney)};
 $('#win').onclick=()=>{if(phase!=='winner'){toast('모두 체크한 뒤 승자를 골라줘');return}$('#winnerHint').classList.add('show');render()};
-$('#undo').onclick=undo;renderSetupHistory();render();</script></body></html>
+$('#undo').onclick=undo;renderSetupHistory();render();</script>
+<div id="v4-developer-splash"><div class="v4-dev-card"><div class="v4-dev-title">V4 Poker</div><div class="v4-dev-name">개발자: 장규민</div><div class="v4-dev-copy">© 2026</div><button id="v4-dev-start" type="button">시작하기</button></div></div>
+<style>#v4-developer-splash{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(5,10,7,.96)}.v4-dev-card{text-align:center;padding:38px 46px;border-radius:24px;background:#173b28;border:1px solid #8b6842;box-shadow:0 20px 60px #000;min-width:280px}.v4-dev-title{font-size:32px;font-weight:900;color:#f0d59b;margin-bottom:18px}.v4-dev-name{font-size:20px;font-weight:700}.v4-dev-copy{font-size:13px;opacity:.7;margin:6px 0 24px}#v4-dev-start{border:1px solid #d39a4e;border-radius:12px;padding:13px 32px;font-size:18px;font-weight:900;background:#fff;color:#173b28} </style>
+<script>document.getElementById('v4-dev-start').addEventListener('click',function(){document.getElementById('v4-developer-splash').remove()})</script>
+</body></html>
