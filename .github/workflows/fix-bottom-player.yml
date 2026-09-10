@@ -15,49 +15,38 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Keep all players inside the screen
+      - name: Keep all players inside the screen and enlarge action buttons
         run: |
           python3 - <<'PY'
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          # 기존 위치 규칙을 모두 화면 안쪽의 안전한 위치로 고정
-          replacements = {
-              '.p1{left:3%;top:2%;transform:rotate(180deg)}.p2{right:3%;top:2%;transform:rotate(180deg)}.p3{left:0;top:49%;transform:translateY(-50%) rotate(90deg)}.p4{right:0;top:49%;transform:translateY(-50%) rotate(-90deg)}.p5{left:3%;bottom:7%;transform:rotate(0deg)}.p6{right:3%;bottom:7%;transform:rotate(0deg)}': '.p1{left:4%;top:3%;transform:rotate(180deg)}.p2{right:4%;top:3%;transform:rotate(180deg)}.p3{left:4%;top:48%;transform:translateY(-50%) rotate(90deg)}.p4{right:4%;top:48%;transform:translateY(-50%) rotate(-90deg)}.p5{left:4%;bottom:12%;transform:rotate(0deg)}.p6{right:4%;bottom:12%;transform:rotate(0deg)}',
-              '.p1{left:2%;top:0.8%}': '.p1{left:4%;top:2%}',
-              '.p2{right:2%;top:0.8%}': '.p2{right:4%;top:2%}',
-              '.p3{left:0.8%;top:50%}': '.p3{left:4%;top:48%}',
-              '.p4{right:0.8%;top:50%}': '.p4{right:4%;top:48%}',
-              '.p5{left:2%;bottom:7%}': '.p5{left:4%;bottom:12%}',
-              '.p6{right:2%;bottom:7%}': '.p6{right:4%;bottom:12%}',
-              '.p5,.p6{bottom:7%}': '.p5,.p6{bottom:12%}',
-              '.player{width:96px}': '.player{width:88px}',
-          }
-          for old, new in replacements.items():
-              s = s.replace(old, new)
 
-          # 마지막 안전장치: 어떤 미디어쿼리보다 우선하도록 끝에 오버라이드 추가
-          marker = '/* FINAL SAFE PLAYER POSITION */'
+          marker = '/* FINAL PLAYER LAYOUT V2 */'
           if marker not in s:
               s = s.replace('</style>', '''
-          /* FINAL SAFE PLAYER POSITION */
+          /* FINAL PLAYER LAYOUT V2 */
           @media (min-width: 801px) and (orientation: landscape) {
-            .player { width: 88px !important; }
+            .player { width: 100px !important; }
             .p1 { left: 4% !important; top: 2% !important; }
             .p2 { right: 4% !important; top: 2% !important; }
-            .p3 { left: 4% !important; top: 48% !important; }
-            .p4 { right: 4% !important; top: 48% !important; }
-            .p5 { left: 4% !important; bottom: 12% !important; }
-            .p6 { right: 4% !important; bottom: 12% !important; }
+            .p3 { left: 4% !important; top: 47% !important; }
+            .p4 { right: 4% !important; top: 47% !important; }
+            .p5 { left: 4% !important; bottom: 20% !important; }
+            .p6 { right: 4% !important; bottom: 20% !important; }
+            .actions { width: 150% !important; margin-left: -25% !important; gap: 4px !important; }
+            .actions button { height: 36px !important; font-size: 11px !important; padding: 0 4px !important; border-radius: 8px !important; }
           }
           @media (max-width: 800px) {
-            .player { width: 92px !important; }
+            .player { width: 100px !important; }
             .p1 { left: 3% !important; top: 2% !important; }
             .p2 { right: 3% !important; top: 2% !important; }
-            .p3 { left: 3% !important; top: 46% !important; }
-            .p4 { right: 3% !important; top: 46% !important; }
-            .p5 { left: 3% !important; bottom: 10% !important; }
-            .p6 { right: 3% !important; bottom: 10% !important; }
+            .p3 { left: 3% !important; top: 45% !important; }
+            .p4 { right: 3% !important; top: 45% !important; }
+            .p5 { left: 3% !important; bottom: 16% !important; }
+            .p6 { right: 3% !important; bottom: 16% !important; }
+            .actions { width: 145% !important; margin-left: -22.5% !important; gap: 3px !important; }
+            .actions button { height: 34px !important; font-size: 10px !important; padding: 0 3px !important; border-radius: 8px !important; }
           }
           </style>''')
           p.write_text(s, encoding='utf-8')
